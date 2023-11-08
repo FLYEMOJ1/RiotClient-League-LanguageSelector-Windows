@@ -71,6 +71,6 @@ if "%language_choice%"=="1" (
 )
 
 REM 启动leagueClient并设置语言
-start "" "%leagueClient_path%LeagueClient.exe" "--locale=!language!"
+start "" "%leagueClient_path%\LeagueClient.exe" "--locale=!language!"
 
 :end
