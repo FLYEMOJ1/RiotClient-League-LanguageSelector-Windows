@@ -15,7 +15,7 @@
 ::
 ::
 :: Last Update: KST 2023-11-08 5:00 PM
-:: Update log: Lazy to write haha
+:: Update log: Change remark from REM to ::
 
 @ECHO OFF
 :: Start of Title set.
@@ -27,12 +27,12 @@ title League of Legends Manual Language Selector
 @echo off
 setlocal enabledelayedexpansion
 
-REM Set Where riotClient info file is gonna save.
+:: Set Where leagueClient info file is gonna save.
 set "leagueClient_info_file=%userprofile%\leagueClient_info.txt"
 
-REM Check leagueClient_Info.txt exist. If not, then let user manualy input.
+:: Check leagueClient_Info.txt exist. If not, then let user manualy input.
 if not exist "%leagueClient_info_file%" (
-    echo Please manual input leagueClient directory
+    echo Please manual input leagueClient directory *no exe only directory*
     set /p "leagueClient_path="
     echo !leagueClient_path!> "%leagueClient_info_file%"
 ) else (
@@ -40,7 +40,7 @@ if not exist "%leagueClient_info_file%" (
     set /p leagueClient_path=<"%leagueClient_info_file%"
 )
 
-REM Show Language Select menu
+:: Show Language Select menu
 :language_menu
 cls
 echo Select Language:
@@ -70,7 +70,7 @@ if "%language_choice%"=="1" (
     goto :language_menu
 )
 
-REM 启动leagueClient并设置语言
+:: Start LeagueClient.exe with selected language.
 start "" "%leagueClient_path%\LeagueClient.exe" "--locale=!language!"
 
 :end
