@@ -14,18 +14,28 @@
 :: 如果您花钱购买了该工具，那证明你已经被骗钱了。这是个免费软件。
 ::
 ::
-:: Last Update: KST 2023-11-08 5:00 PM
-:: Update log: Change remark from REM to ::
+:: Last Update: KST 2023-11-22 9:40 PM
+:: Update log: Add a taskkill set to Force LeagueClient off.
 
-@ECHO OFF
+@echo off
+setlocal enabledelayedexpansion
 :: Start of Title set.
 
 title League of Legends Manual Language Selector
 
 :: End of Title set.
 
-@echo off
-setlocal enabledelayedexpansion
+:: Force Riot Client Off.
+taskkill /t /f /im LeagueClient.exe
+taskkill /t /f /im LeagueClientUx.exe
+taskkill /t /f /im LeagueClientUxRender.exe
+taskkill /t /f /im LeagueCrashHandler64.exe
+taskkill /t /f /im RiotClientCrashHandler.exe
+taskkill /t /f /im RiotClientServices.exe
+taskkill /t /f /im RiotClientUx.exe
+taskkill /t /f /im RiotClientUxRender.exe
+taskkill /t /f /im VALORANT.exe
+:: End of Shit hole.
 
 :: Set Where leagueClient info file is gonna save.
 set "leagueClient_info_file=%userprofile%\leagueClient_info.txt"
