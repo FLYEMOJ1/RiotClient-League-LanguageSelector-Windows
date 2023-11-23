@@ -19,23 +19,57 @@
 
 @echo off
 setlocal enabledelayedexpansion
-:: Start of Title set.
 
-title League of Legends Manual Language Selector
+:: getAdmin
+>nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
 
-:: End of Title set.
+REM --> If error flag set, we do not have admin.
+if '%errorlevel%' NEQ '0' (
+    echo Requesting administrative privileges...
+    goto UACPrompt
+) else ( goto gotAdmin )
+
+:UACPrompt
+    echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\getadmin.vbs"
+    set params = %*:"=""
+    echo UAC.ShellExecute "cmd.exe", "/c ""%~s0"" %params%", "", "runas", 1 >> "%temp%\getadmin.vbs"
+
+    "%temp%\getadmin.vbs"
+    del "%temp%\getadmin.vbs"
+    exit /B
+
+:gotAdmin
+    pushd "%CD%"
+    CD /D "%~dp0"
+
+echo Running with administrative privileges. To make sure this will work.
 
 :: Force Riot Client Off.
+title PreLoading...
+cls
+echo Killing Riot Game Clients.
 taskkill /t /f /im LeagueClient.exe
+title PreLoading... 10%
 taskkill /t /f /im LeagueClientUx.exe
 taskkill /t /f /im LeagueClientUxRender.exe
+title PreLoading... 30%
 taskkill /t /f /im LeagueCrashHandler64.exe
 taskkill /t /f /im RiotClientCrashHandler.exe
 taskkill /t /f /im RiotClientServices.exe
+title PreLoading... 60%
 taskkill /t /f /im RiotClientUx.exe
 taskkill /t /f /im RiotClientUxRender.exe
+title PreLoading... 80%
 taskkill /t /f /im VALORANT.exe
+title PreLoading... 100%
+cls
 :: End of Shit hole.
+
+:: Start of Title set.
+
+title League of Legends Language Selector
+
+:: End of Title set.
 
 :: Set Where leagueClient info file is gonna save.
 set "leagueClient_info_file=%userprofile%\leagueClient_info.txt"
@@ -46,7 +80,7 @@ if not exist "%leagueClient_info_file%" (
     set /p "leagueClient_path="
     echo !leagueClient_path!> "%leagueClient_info_file%"
 ) else (
-    REM From Saved file to read leagueClient Directory.
+:: From Saved file to read leagueClient Directory.
     set /p leagueClient_path=<"%leagueClient_info_file%"
 )
 
