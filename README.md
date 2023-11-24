@@ -1,14 +1,14 @@
 # RiotClient-League-LanguageSelector-Windows
 A Batch make League of Legends force to use the language you want.
 
-# 中文
-用起来很简单。
-下载 [RiotClientLanguageSelector.bat](https://github.com/FLYEMOJ1/RiotClient-League-LanguageSelector-Windows/releases/download/v1.0.3/RiotClientLanguageSelector.bat)
+This is a cuttingedge beta.
 
-找到有 LeagueClient.exe 的那个文件夹
+**Breaking change may happen at any day any time.**
 
-打开这个 bat 文件
+Please don't use this branch as your daily League of Legends useage.
 
-复制他的路径到命令行里面
+~~It might will break your game.~~
 
-启动即可。
+And welcome to commit, push, merge to this branch.
+
+If your code can help.
