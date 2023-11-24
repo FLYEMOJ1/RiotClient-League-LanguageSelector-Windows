@@ -48,9 +48,9 @@ CD /D "%~dp0"
 echo Running with administrative privileges. To make sure this will work.
 echo Checking Updates.
 
-:: Force remove temp files. and create temp directory.
 rd /s /q "%TEMP_DIR%"
 if not exist "%TEMP_DIR%" mkdir "%TEMP_DIR%"
+:: Force remove temp files. and create temp directory.
 
 cd "%TEMP_DIR%"
 
@@ -75,24 +75,24 @@ echo Latest version is: %REMOTE_VERSION%
 
 echo Downloading latest version...
 
-:: Download latest version. (from GitHub and ZIP)
+:: Download latest version direct from repository. (from GitHub and ZIP)
 curl -L "https://codeload.github.com/FLYEMOJ1/RiotClient-League-LanguageSelector-Windows/zip/refs/heads/main" -o update.zip
 
-:: Decompress to temp.
+:: Decompress latest update to temp folder.
 powershell Expand-Archive -Path update.zip -DestinationPath .
 
 :: Copy update file to installation location.
 xcopy /y "%TEMP_DIR%\%REPO_NAME%-main\RiotClientLanguageSelector.bat" "%INSTALL_DIR%"
 
-echo Update Complete.
+echo Update Complete. Script Restarting...
 start "" "%INSTALL_DIR%\RiotClientLanguageSelector.bat"
 goto end
 
 :update_Cleanup
-:: Remove temp files.
 del /q update.zip
 cd ..
 rd /s /q "%TEMP_DIR%"
+:: Remove temp files.
 
 :preload
 :: Force Riot Client Off.
@@ -136,7 +136,7 @@ if not exist "%leagueClient_info_file%" (
     set /p leagueClient_path=<"%leagueClient_info_file%"
 )
 
-:: Show Language Select menu
+:: Language Select menu
 :language_menu
 cls
 echo Select Language:
